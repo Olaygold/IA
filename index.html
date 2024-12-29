@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IA Trading Signals - Home</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome to IA Trading Signals</h2>
+        <p>Unlock the potential of forex trading with our reliable and expert-curated signals. We offer tailored trading signals that help you make smarter and more profitable trades.</p>
+
+        <h3>Available Subscription Plans:</h3>
+        <ul>
+            <li><strong>VIP 0</strong> - 3,000 Naira per week 
+                <button onclick="payWithPaystack(3000, 'VIP 0')">Pay Now</button>
+            </li>
+            <li><strong>VIP 1</strong> - 6,000 Naira per week 
+                <button onclick="payWithPaystack(6000, 'VIP 1')">Pay Now</button>
+            </li>
+            <li><strong>VIP 3</strong> - 10,000 Naira per month 
+                <button onclick="payWithPaystack(10000, 'VIP 3')">Pay Now</button>
+            </li>
+            <!-- Add more plans similarly -->
+        </ul>
+        
+        <script src="https://js.paystack.co/v1/inline.js"></script>
+        <script>
+            function payWithPaystack(amount, plan) {
+                var handler = PaystackPop.setup({
+                    key: 'pk_live_655c8bcc32899ee6c6ff3acf23036499935e69ec',
+                    email: 'user@example.com', // Replace with the user's email
+                    amount: amount * 100, // Convert Naira to Kobo
+                    currency: 'NGN',
+                    callback: function(response) {
+                        // Handle successful payment
+                        alert('Payment successful! Reference: ' + response.reference);
+                        window.location.href = `vip-access.html?plan=${encodeURIComponent(plan)}`;
+                    },
+                    onClose: function() {
+                        alert('Payment was not completed.');
+                    }
+                });
+                handler.openIframe();
+            }
+        </script>
+    </div>
+</body>
+</html>

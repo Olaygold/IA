@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIP Access</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>VIP Access</h2>
+        <p id="vipMessage"></p>
+
+        <ul id="vipList">
+            <li><strong>VIP 0</strong> - Basic signals</li>
+            <li><strong>VIP 1</strong> - Advanced signals</li>
+            <li><strong>VIP 3</strong> - Premium signals</li>
+            <!-- Add more VIP levels -->
+        </ul>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const paidPlan = urlParams.get('plan');
+
+        document.getElementById('vipMessage').textContent = 
+            `You have access to ${paidPlan}. Only content for this plan is available.`;
+
+        // Hide plans not paid for
+        document.querySelectorAll('#vipList li').forEach(item => {
+            if (!item.textContent.includes(paidPlan)) {
+                item.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
